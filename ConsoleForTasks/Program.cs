@@ -101,24 +101,122 @@ namespace ConsoleForTasks
             Console.WriteLine($"{count} ice creams could be bought.");
         }
 
+        static double GetMedian(int[] array)
+        {
+            int sum = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                sum += array[i];
+            }
+
+            return sum / array.Length;
+        }
+
+        static int GetPositiveNumbersCount(int[] array)
+        {
+            int count = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] > 0)
+                {
+                    ++count;
+                }
+            }
+
+            return count;
+        }
+
+        static void ModifyArray(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    array[i] = array[i] * -1;
+                }
+                else
+                {
+                    array[i] = array[i] * array[i];
+                }
+            }
+        }
+
+        static int GetSumBetweenMinAndMax(int[] array)
+        {
+            int maxI = 0;
+            int minI = 0;
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] > array[maxI])
+                {
+                    maxI = i;
+                }
+                if (array[i] < array[minI])
+                {
+                    minI = i;
+                }
+            }
+            int sum = 0;
+            if (maxI < minI)
+            {
+                int temp = maxI;
+                maxI = minI;
+                minI = temp;
+            }
+
+            for (int i = minI + 1; i < maxI; i++)
+            {
+                sum += array[i];
+            }
+
+            return sum;
+        }
+
+        static int[] GetArrayWithPositiveNumbers(int[] array)
+        {
+            int count = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] >= 0)
+                {
+                    count++;
+                }
+            }
+
+            if(count == 0)
+            {
+                return null;
+            }
+
+            int[] positiveNumbersArray = new int[count];
+            for (int i = 0, j = 0; i < array.Length; i++)
+            {
+                if (array[i] >= 0)
+                {
+                    positiveNumbersArray[j++] = array[i];
+                }
+            }
+
+            return positiveNumbersArray;
+        }
+
         static void Main(string[] args)
         {
-            int userInput;
-            do
+            //Ctrl+Shift+Space
+            int size = 10;//Convert.ToInt32(Console.ReadLine());
+            int[] array = new int[size];
+            Random random = new Random();
+            for (int i = 0; i < size; i++)
             {
-                userInput = Convert.ToInt32(Console.ReadLine());
-                switch (userInput)
-                {
-                    case 1:
-                        IceCreamCountAndReminder();
-                        break;
-                    case 2:
-                        SumFromAToBMultipliedByN();
-                        break;
-                    case 0:
-                        break;
-                }
-            } while (userInput != 0);
+                array[i] = random.Next(-10, -5);
+            }
+
+            for (int i = 0; i < size; i++)
+            {
+                Console.Write(array[i] + "\t");
+            }
+            Console.WriteLine();
+
         }
     }
 }
